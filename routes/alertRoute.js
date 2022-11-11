@@ -1,7 +1,6 @@
 const express = require("express")
 const router = express.Router()
 const alertModal = require('../models/alertModal')
-// const { protect } = require("../middelwares/authMiddelware");
 require('dotenv').config()
 const {allAlert, addAlert, deleteAlert, updateAlert}= require('')
 
