@@ -6,7 +6,7 @@ const alertRoute = require('./routes/alertRoute')
 const suggestionsRoute = require('./routes/suggestionsRoute')
 const userRoute = require('./routes/userRoute')
 const bodyParser = require("body-parser")
-const loginRoute = require('./routes/loginRoute')
+const phoneRoute = require('./routes/phoneRoute')
 require('dotenv').config()
 const cors = require('cors')
 
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use('/api/alerts', alertRoute)
 app.use('/api/user',userRoute)
 app.use('/api/suggestions',suggestionsRoute)
-app.use('/api/phone',loginRoute)
+app.use('/api/phone',phoneRoute)
 
 app.listen(port, () => {
   console.log(`server is runing on port ${port}`);

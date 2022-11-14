@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async (req,res)=>{
         firstName:user.firstName,
         lastName:user.lastName,
         phone:user.phone,
-        token: generateToken(user._id)
+        token: generateToken(user._id,user.isAdmin)
     })
  }else{
     throw new Error("Failed to create User try again later")
@@ -37,7 +37,7 @@ const authUser = asyncHandler(async(req,res)=>{
         firstName:user.firstName,
         lastName:user.lastName,
         phone:user.phone,
-        token: generateToken(user._id)
+        token: generateToken(user._id,user.isAdmin)
       })
    }else{
       res.status(401)
