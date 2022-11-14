@@ -1,13 +1,12 @@
-const express = require("express")
-const router = express.Router()
-const alertModal = require('../models/alertModal')
-// const { protect } = require("../middelwares/authMiddelware");
-require('dotenv').config()
-const {allAlert, addAlert, deleteAlert, updateAlert}= require('')
+const express = require("express");
+const router = express.Router();
+const alertModal = require("../models/alertModel");
+require("dotenv").config();
+const { allAlert, addAlert, deleteAlert, updateAlert } = require("../controllers/alertController");
 
-router.get('/', protect, allAlert)
-router.post('/',protect, addAlert)
-router.delete('/',protect, deleteAlert)
-router.put('/',protect, updateAlert)
+router.get("/alerts", allAlert);
+router.post("/alerts", addAlert);
+router.delete("/alerts/:id", deleteAlert);
+router.put("/alerts/:id", updateAlert);
 
-module.exports = router
+module.exports = router;
