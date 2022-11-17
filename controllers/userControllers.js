@@ -4,8 +4,8 @@ const User = require('../models/userModel')
 
 // api/user   POST gets in body firstName,lastName,phone,password  and optionally isAdmin default false
 const registerUser = asyncHandler(async (req,res)=>{
- const {firstName,lastName,phone,password,isAdmin} = req.body
- if(!firstName || !phone || !password ||!lastName){
+ const {firstName,lastName,phone,email,isAdmin} = req.body
+ if(!firstName || !phone || !email ||!lastName){
     res.status(400)
     throw new Error("please Enter all the fiels")
  }
@@ -14,13 +14,14 @@ const registerUser = asyncHandler(async (req,res)=>{
     res.status(400)
     throw new Error("User already exist")
  } else{
- const user = await User.create({firstName,lastName,phone,password,isAdmin})
+ const user = await User.create({firstName,lastName,phone,email,isAdmin})
  if(user){
     res.status(201).json({
         _id:user._id,
         firstName:user.firstName,
         lastName:user.lastName,
         phone:user.phone,
+        email:user.email,
         token: generateToken(user._id),
         isAdmin
     })
@@ -30,9 +31,10 @@ const registerUser = asyncHandler(async (req,res)=>{
 }})
 
 const authUser = asyncHandler(async(req,res)=>{
-   const {phone,password} = req.body
+   console.log(req.body);
+   const {phone} = req.body
    const user = await User.findOne({phone})
-   if(user && await user.matchPassword(password) ){
+   if(user ){
       res.status(201).json({
          _id:user._id,
         firstName:user.firstName,
@@ -42,7 +44,7 @@ const authUser = asyncHandler(async(req,res)=>{
       })
    }else{
       res.status(401)
-      throw new Error("Wrong Phone or Password")
+      throw new Error("Wrong Phone ")
    }
 })
 

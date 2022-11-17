@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    password: {
+    email: {
       type: String,
       required: true,
     },
@@ -28,18 +28,18 @@ const UserSchema = mongoose.Schema(
   { timestaps: true }
 );
 
-UserSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
+// UserSchema.methods.matchPassword = async function (enteredPassword) {
+//   return await bcrypt.compare(enteredPassword, this.password);
+// };
 
-UserSchema.pre("save", async function (next) {
-  if (!this.isModified) {
-    next();
-  }
+// UserSchema.pre("save", async function (next) {
+//   if (!this.isModified) {
+//     next();
+//   }
 
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
+//   const salt = await bcrypt.genSalt(10);
+//   this.password = await bcrypt.hash(this.password, salt);
+// });
 
 const User = mongoose.model("citizenUser", UserSchema);
 module.exports = User;
