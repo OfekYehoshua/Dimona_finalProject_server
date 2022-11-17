@@ -3,9 +3,7 @@ const { sendMessageVerify, codeVerify, hazzardAccepted, hazzardOnWork, hazzardFi
 const router = express.Router()
 
 router.get('/login',sendMessageVerify)
-
 router.get('/verify',codeVerify)
-
 router.post('/hazzardin',hazzardAccepted)
 router.post('/hazzardon',hazzardOnWork)
 router.post('/hazzardfinish',hazzardFinished)

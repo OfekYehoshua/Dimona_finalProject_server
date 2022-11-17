@@ -22,8 +22,20 @@ const protect = asyncHandler(async(req,res,next)=>{
     }
 })
 
-const verifyTokenAndAdmin = (req, res, next) => {
+const verifyTokenAndAuthorization = (req, res, next) => {
+  protect(req, res, () => {
+    if (req.user.id === req.params.id || req.user.isAdmin) {
+      console.log(req.params.id);
+      next();
+    } else {
+      res.status(403).json("You are not alowed to do that!");
+    }
+  });
+};
+
+const verifyTokenAdmin = (req, res, next) => {
     protect(req, res, () => {
+      console.log(req.user)
       if (req.user.isAdmin) {
         next();
       } else {
@@ -32,4 +44,4 @@ const verifyTokenAndAdmin = (req, res, next) => {
     });
   };
 
-module.exports ={protect,verifyTokenAndAdmin}
+module.exports ={protect,verifyTokenAdmin,verifyTokenAndAuthorization}

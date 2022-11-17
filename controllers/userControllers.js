@@ -4,7 +4,7 @@ const User = require('../models/userModel')
 
 // api/user   POST gets in body firstName,lastName,phone,password  and optionally isAdmin default false
 const registerUser = asyncHandler(async (req,res)=>{
- const {firstName,lastName,phone,password} = req.body
+ const {firstName,lastName,phone,password,isAdmin} = req.body
  if(!firstName || !phone || !password ||!lastName){
     res.status(400)
     throw new Error("please Enter all the fiels")
@@ -14,14 +14,15 @@ const registerUser = asyncHandler(async (req,res)=>{
     res.status(400)
     throw new Error("User already exist")
  } else{
- const user = await User.create({firstName,lastName,phone,password})
+ const user = await User.create({firstName,lastName,phone,password,isAdmin})
  if(user){
     res.status(201).json({
         _id:user._id,
         firstName:user.firstName,
         lastName:user.lastName,
         phone:user.phone,
-        token: generateToken(user._id,user.isAdmin)
+        token: generateToken(user._id),
+        isAdmin
     })
  }else{
     throw new Error("Failed to create User try again later")
@@ -37,7 +38,7 @@ const authUser = asyncHandler(async(req,res)=>{
         firstName:user.firstName,
         lastName:user.lastName,
         phone:user.phone,
-        token: generateToken(user._id,user.isAdmin)
+        token: generateToken(user._id)
       })
    }else{
       res.status(401)
