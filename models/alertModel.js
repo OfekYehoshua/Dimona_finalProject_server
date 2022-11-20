@@ -5,7 +5,7 @@ const alertSchema = mongoose.Schema(
     title: { type: "String", required: true, unique: true },
     subTitle: { type: "String", required: true },
     body: { type: "String", required: true },
-    img: {
+    img: {  
       type: "String",
       required: true,
     },

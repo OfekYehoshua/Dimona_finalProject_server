@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 const allAlert = asyncHandler(async (req, res) => {
   try {
-    const alerts = await Alert.findOne({}).sort({ _id: -1 });
+    const alerts = await Alert.find({}).sort({ _id: -1 });
     res.status(200).json(alerts);
   } catch (err) {
     res.status(500).json(err);
