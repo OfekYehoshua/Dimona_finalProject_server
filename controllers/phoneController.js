@@ -7,7 +7,9 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const serSid = process.env.TWILIO_SER_SID;
 const client = require('twilio')(accountSid, authToken);  
 
+
 const sendMessageVerify = asyncHandler( (req,res) => {
+
     if (req.query.phonenumber) {
        client
        .verify
@@ -32,6 +34,7 @@ const sendMessageVerify = asyncHandler( (req,res) => {
        })
     }
 })
+
 
 const codeVerify = asyncHandler ((req, res, err) => {
     

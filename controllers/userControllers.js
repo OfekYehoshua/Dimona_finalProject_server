@@ -11,8 +11,8 @@ const registerUser = asyncHandler(async (req,res)=>{
  }
  const userExist = await User.findOne({phone})
  if(userExist){
-    res.status(400)
-    throw new Error("User already exist")
+    res.status(400).send({message:"userExist"})
+    
  } else{
  const user = await User.create({firstName,lastName,phone,email,isAdmin})
  if(user){
@@ -40,6 +40,7 @@ const authUser = asyncHandler(async(req,res)=>{
         firstName:user.firstName,
         lastName:user.lastName,
         phone:user.phone,
+        isAdmin:user.isAdmin,
         token: generateToken(user._id)
       })
    }else{
