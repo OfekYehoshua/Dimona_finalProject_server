@@ -1,5 +1,5 @@
 const express = require("express")
-const { sendMessageVerify, codeVerify, hazzardAccepted, hazzardOnWork, hazzardFinished, suggestionSent } = require("../controllers/phoneController")
+const { sendMessageVerify, codeVerify, hazzardAccepted, hazzardOnWork, hazzardFinished, suggestionSent, addIdPhone } = require("../controllers/phoneController")
 const router = express.Router()
 
 router.get('/login',sendMessageVerify)
