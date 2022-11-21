@@ -5,6 +5,7 @@ const User = require('../models/userModel')
 // api/user   POST gets in body firstName,lastName,phone,password  and optionally isAdmin default false
 const registerUser = asyncHandler(async (req,res)=>{
  const {firstName,lastName,phone,email,isAdmin} = req.body
+ console.log(req.body);
  if(!firstName || !phone || !email ||!lastName){
     res.status(400)
     throw new Error("please Enter all the fiels")
@@ -59,6 +60,17 @@ const allUsers = asyncHandler(async(req,res)=>{
    const users = await User.find(keyword).find({_id:{$ne:req.user._id}})
    res.send(users)
 })
+const patchUser = asyncHandler(async(req,res)=>{
+   console.log(req.body);
+ const userfound = await User.findByIdAndUpdate(req.params.id,req.body)
+ const userUpdated = await User.findById(req.params.id)
+  if(userfound&&userUpdated){
+   res.status(200).json(userUpdated)
+  }
+  else{
+   res.status(404).json({message:"cant find this user"})
+  }
+})
 
 
-module.exports ={registerUser,authUser,allUsers}
+module.exports ={registerUser,authUser,allUsers,patchUser}

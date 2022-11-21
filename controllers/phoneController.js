@@ -130,7 +130,7 @@ const hazzardFinished = asyncHandler(async(req,res)=>{
 
 const suggestionSent = asyncHandler(async(req,res)=>{
         const {_uid,phone} =req.body
-        if(!_uid||!PhoneNumberContext){
+        if(!_uid||!phone){
             res.status(400)
             throw new Error("bad request")
         }

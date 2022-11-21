@@ -6,6 +6,7 @@ const alertRoute = require('./routes/alertRoute')
 const suggestionsRoute = require('./routes/suggestionsRoute')
 const userRoute = require('./routes/userRoute')
 const bodyParser = require("body-parser")
+app.use(bodyParser.json());
 const phoneRoute = require('./routes/phoneRoute')
 require('dotenv').config()
 const cors = require('cors')
