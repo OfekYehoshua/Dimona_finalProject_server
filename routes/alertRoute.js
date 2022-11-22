@@ -3,10 +3,10 @@ const router = express.Router();
 const alertModal = require("../models/alertModel");
 require("dotenv").config();
 const { allAlert, addAlert, deleteAlert, updateAlert } = require("../controllers/alertController");
-
-router.get("/", allAlert);
-router.post("/", addAlert);
-router.delete("/:id", deleteAlert);
-router.put("/:id", updateAlert);
+const { protect, verifyTokenAndAuthorization,verifyTokenAdmin } = require("../middleware/authMiddleware")
+router.get("/",protect, allAlert);
+router.post("/",verifyTokenAdmin, addAlert);
+router.delete("/:id",verifyTokenAdmin, deleteAlert);
+router.put("/:id",verifyTokenAdmin, updateAlert);
 
 module.exports = router;
