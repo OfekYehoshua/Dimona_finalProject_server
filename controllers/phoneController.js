@@ -78,7 +78,10 @@ if(!userWhoSent){
     res.status(400)
     throw new Error("User not found")
 }
-const messageToCitizen = `Hello ${userWhoSent[0].firstName} we got your report ${location} `
+const messageToCitizen = `שלום
+${userWhoSent[0].firstName}
+קיבלנו את הדיווח שלך ב
+${location}`
 client.messages 
     .create({body:messageToCitizen, from: '+18312152510', to:phone})
 .then(message => res.status(200).send(message)).catch((err)=>{
@@ -98,7 +101,10 @@ const hazzardOnWork = asyncHandler(async(req,res)=>{
         res.status(400)
         throw new Error("User not found")
     }
-    const messageToCitizen = `Hello ${userWhoSent[0].firstName}.We started working on your report at ${location} ` 
+    const messageToCitizen = `שלום
+${userWhoSent[0].firstName}
+התחלנו לעבוד על הדיווח שלך ב
+${location} ` 
     client.messages 
         .create({body:messageToCitizen , from: '+18312152510', to:phone})
     .then(message => res.status(200).send(message)).catch((err)=>{
@@ -118,7 +124,10 @@ const hazzardFinished = asyncHandler(async(req,res)=>{
             res.status(400)
             throw new Error("User not found")
         }
-        const messageToCitizen = `Hello ${userWhoSent[0].firstName}.We finished working on your report at ${location} ` 
+        const messageToCitizen = `שלום
+${userWhoSent[0].firstName}
+סיימנו לעבוד על הדיווח ששלחת ב
+${location} ` 
         client.messages 
             .create({body:messageToCitizen , from: '+18312152510', to:phone})
         .then(message => res.status(200).send(message)).catch((err)=>{
@@ -139,7 +148,10 @@ const suggestionSent = asyncHandler(async(req,res)=>{
             res.status(400)
             throw new Error("User not found")
         }
-        const messageToCitizen = `Hello ${userWhoSent[0].firstName}.We got your suggestion! ` 
+        const messageToCitizen = `שלום
+${userWhoSent[0].firstName}
+קיבלנו את ההצעת ייעול שלך 
+` 
         client.messages 
             .create({body:messageToCitizen , from: '+18312152510', to:phone})
         .then(message => res.status(200).send(message)).catch((err)=>{
