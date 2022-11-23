@@ -13,8 +13,10 @@ const protect = asyncHandler(async(req,res,next)=>{
               req.user = decoded
               next()
             }
+            else{
             req.user = await User.findById(decoded.id)
             next()
+            }
         } catch (error) {
             res.status(401)
             throw new Error("Token failed")
@@ -38,8 +40,7 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 
 const verifyTokenAdmin = (req, res, next) => {
     protect(req, res, () => {
-      console.log(req.user)
-      if (req.user.isAdmin) {
+      if (req.user&&req.user.isAdmin) {
         next();
       } else {
         res.status(403).json("You are not alowed to do that!");
